@@ -304,7 +304,7 @@ module.exports = function (grunt) {
 			all: {
 			  files: [
 				{
-				  cwd: '<%= yeoman.app %>/scripts/md',
+				  cwd: '<%= yeoman.app %>/scripts/md/{,*/}',
 				  expand: true,
 				  src: '*.md',
 				  dest: '<%= yeoman.app %>/scripts/ejs/',
