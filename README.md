@@ -55,6 +55,15 @@ for quick deploy code
 make deploy
 ```
 
+## Push
+
+**Warning** : you have to push your code to branch `dev` not `master`
+
+quick push code
+
+```
+make push
+```
 
 ## License
 
