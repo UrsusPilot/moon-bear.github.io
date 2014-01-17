@@ -302,15 +302,18 @@ module.exports = function (grunt) {
 		},
 		markdown: {
 			all: {
-			  files: [
-				{
-				  cwd: '<%= yeoman.app %>/scripts/md/{,*/}',
-				  expand: true,
-				  src: '*.md',
-				  dest: '<%= yeoman.app %>/scripts/ejs/',
-				  ext: '.html'
+			  	files: [
+					{
+				  		cwd: '<%= yeoman.app %>/scripts/md/intro/',
+				  		expand: true,
+				  		src: '*.md',
+				  		dest: '<%= yeoman.app %>/scripts/templates/',
+				  		ext: '.ejs'
+					}
+			  	],
+			  	options: {
+					template: '<%= yeoman.app %>/scripts/templates/mk.ejs'
 				}
-			  ]
 			}
 		}
 	});

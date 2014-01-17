@@ -21,6 +21,10 @@ require.config
     bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap'
 
 require [
-  'backbone'
-], (Backbone) ->
+  'backbone',
+  'views/home'
+], (Backbone, home) ->
   Backbone.history.start()
+  homeView = new home()
+  homeView.render()
+  
