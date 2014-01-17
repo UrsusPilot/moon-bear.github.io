@@ -1,0 +1,159 @@
+<!DOCTYPE  html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>doc</title>
+    <style>
+      /*github.com style (c) Vasily Polovnyov <vast@whiteants.net>*/
+      pre code {
+        display: block; padding: 0.5em;
+        color: #333;
+        background: #f8f8ff
+      }
+      pre .comment,
+      pre .template_comment,
+      pre .diff .header,
+      pre .javadoc {
+        color: #998;
+        font-style: italic
+      }
+      pre .keyword,
+      pre .css .rule .keyword,
+      pre .winutils,
+      pre .javascript .title,
+      pre .nginx .title,
+      pre .subst,
+      pre .request,
+      pre .status {
+        color: #333;
+        font-weight: bold
+      }
+      pre .number,
+      pre .hexcolor,
+      pre .ruby .constant {
+        color: #099;
+      }
+      pre .string,
+      pre .tag .value,
+      pre .phpdoc,
+      pre .tex .formula {
+        color: #d14
+      }
+      pre .title,
+      pre .id {
+        color: #900;
+        font-weight: bold
+      }
+      pre .javascript .title,
+      pre .lisp .title,
+      pre .clojure .title,
+      pre .subst {
+        font-weight: normal
+      }
+      pre .class .title,
+      pre .haskell .type,
+      pre .vhdl .literal,
+      pre .tex .command {
+        color: #458;
+        font-weight: bold
+      }
+      pre .tag,
+      pre .tag .title,
+      pre .rules .property,
+      pre .django .tag .keyword {
+        color: #000080;
+        font-weight: normal
+      }
+      pre .attribute,
+      pre .variable,
+      pre .lisp .body {
+        color: #008080
+      }
+      pre .regexp {
+        color: #009926
+      }
+      pre .class {
+        color: #458;
+        font-weight: bold
+      }
+      pre .symbol,
+      pre .ruby .symbol .string,
+      pre .lisp .keyword,
+      pre .tex .special,
+      pre .prompt {
+        color: #990073
+      }
+      pre .built_in,
+      pre .lisp .title,
+      pre .clojure .built_in {
+        color: #0086b3
+      }
+      pre .preprocessor,
+      pre .pi,
+      pre .doctype,
+      pre .shebang,
+      pre .cdata {
+        color: #999;
+        font-weight: bold
+      }
+      pre .deletion {
+        background: #fdd
+      }
+      pre .addition {
+        background: #dfd
+      }
+      pre .diff .change {
+        background: #0086b3
+      }
+      pre .chunk {
+        color: #aaa
+      }
+    </style>
+  </head>
+  <body>  
+    <h1 id="-project-proposal-">期末專題-四軸飛行器(Project Proposal)</h1>
+<p><a href="http://wiki.csie.ncku.edu.tw/embedded/team2013-7">期末專題: Team #7</a>     </p>
+<h2 id="-">題目</h2>
+<ul>
+<li>四軸飛高高(Quadrotor)</li>
+</ul>
+<h2 id="-">預期目標</h2>
+<ul>
+<li>在四軸上面架設攝影機, 利用遙控器去命令空中的四軸拍照, 可將影像儲存到記憶卡</li>
+<li>達成懸停(原作者在github頁面說無法懸停)，可利用optical flow去做速度控制(達成懸停)</li>
+<li>利用FreeRTOS管理Task和Interrupt</li>
+<li>Auto-pilot的達成-必須有位置控制,<a href="/UVNdFqIV94d#地面站軟體設計">地面站軟體設計</a> </li>
+</ul>
+<h2 id="-">組員</h2>
+<ul>
+<li><a href="http://wiki.csie.ncku.edu.tw/User/fboris">fboris</a></li>
+<li><a href="http://wiki.csie.ncku.edu.tw/User/zxc2694">zxc2694</a></li>
+<li><a href="http://wiki.csie.ncku.edu.tw/User/poemking">poemking</a></li>
+<li><a href="http://wiki.csie.ncku.edu.tw/User/shengwen">shengwen</a>
+*</li>
+</ul>
+<h2 id="-budget-">預算(Budget)</h2>
+<p>王宏文同學提供的飛控板</p>
+<p>450mm 機架: 250</p>
+<p><a href="http://goods.ruten.com.tw/item/show?21208014903066"></a><a href="http://goods.ruten.com.tw/item/show?21208014903066">http://goods.ruten.com.tw/item/show?21208014903066</a></p>
+<p>2212 1000kv馬達: 200X4</p>
+<p><a href="http://goods.ruten.com.tw/item/show?21311204264602"></a><a href="http://goods.ruten.com.tw/item/show?21311204264602">http://goods.ruten.com.tw/item/show?21311204264602</a></p>
+<p>ZTW 40A 電子變速器: 270X4</p>
+<p><a href="http://goods.ruten.com.tw/item/show?21111110743710"></a><a href="http://goods.ruten.com.tw/item/show?21111110743710">http://goods.ruten.com.tw/item/show?21111110743710</a></p>
+<p>9047雙葉正反槳: 25X2 </p>
+<p><a href="http://goods.ruten.com.tw/item/show?21206132193224"></a><a href="http://goods.ruten.com.tw/item/show?21206132193224">http://goods.ruten.com.tw/item/show?21206132193224</a></p>
+<p><img src="https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-prn1/823456_682026185150133_732862103_o.jpg" alt=""></p>
+<p>電源分配板: $35</p>
+<p>螺絲包: $20</p>
+<p>電源開關:$16</p>
+<p>影像模組:275人民幣</p>
+<p><img src="https://hackpad-attachments.s3.amazonaws.com/hackpad.com_r4gGIYJMsRp_p.88549_1387523568296_淘寶影像模組收據.png" alt=""></p>
+<h2 id="-">討論和程式</h2>
+<p>github: <a href="https://github.com/fboris/QuadrotorFlightControl"></a><a href="https://github.com/fboris/QuadrotorFlightControl">https://github.com/fboris/QuadrotorFlightControl</a></p>
+<p>hackpad: <a href="https://embeddedcool.hackpad.com"></a><a href="https://embeddedcool.hackpad.com">https://embeddedcool.hackpad.com</a></p>
+<h2 id="-">參考資訊</h2>
+<p>王宏文同學飛控板相關資訊：<a href="https://github.com/Hom19910422/QCopterFlightControl/wiki"></a><a href="https://github.com/Hom19910422/QCopterFlightControl/wiki">https://github.com/Hom19910422/QCopterFlightControl/wiki</a></p>
+
+  </body>
+</html>

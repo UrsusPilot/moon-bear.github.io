@@ -1,0 +1,149 @@
+<!DOCTYPE  html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>doc</title>
+    <style>
+      /*github.com style (c) Vasily Polovnyov <vast@whiteants.net>*/
+      pre code {
+        display: block; padding: 0.5em;
+        color: #333;
+        background: #f8f8ff
+      }
+      pre .comment,
+      pre .template_comment,
+      pre .diff .header,
+      pre .javadoc {
+        color: #998;
+        font-style: italic
+      }
+      pre .keyword,
+      pre .css .rule .keyword,
+      pre .winutils,
+      pre .javascript .title,
+      pre .nginx .title,
+      pre .subst,
+      pre .request,
+      pre .status {
+        color: #333;
+        font-weight: bold
+      }
+      pre .number,
+      pre .hexcolor,
+      pre .ruby .constant {
+        color: #099;
+      }
+      pre .string,
+      pre .tag .value,
+      pre .phpdoc,
+      pre .tex .formula {
+        color: #d14
+      }
+      pre .title,
+      pre .id {
+        color: #900;
+        font-weight: bold
+      }
+      pre .javascript .title,
+      pre .lisp .title,
+      pre .clojure .title,
+      pre .subst {
+        font-weight: normal
+      }
+      pre .class .title,
+      pre .haskell .type,
+      pre .vhdl .literal,
+      pre .tex .command {
+        color: #458;
+        font-weight: bold
+      }
+      pre .tag,
+      pre .tag .title,
+      pre .rules .property,
+      pre .django .tag .keyword {
+        color: #000080;
+        font-weight: normal
+      }
+      pre .attribute,
+      pre .variable,
+      pre .lisp .body {
+        color: #008080
+      }
+      pre .regexp {
+        color: #009926
+      }
+      pre .class {
+        color: #458;
+        font-weight: bold
+      }
+      pre .symbol,
+      pre .ruby .symbol .string,
+      pre .lisp .keyword,
+      pre .tex .special,
+      pre .prompt {
+        color: #990073
+      }
+      pre .built_in,
+      pre .lisp .title,
+      pre .clojure .built_in {
+        color: #0086b3
+      }
+      pre .preprocessor,
+      pre .pi,
+      pre .doctype,
+      pre .shebang,
+      pre .cdata {
+        color: #999;
+        font-weight: bold
+      }
+      pre .deletion {
+        background: #fdd
+      }
+      pre .addition {
+        background: #dfd
+      }
+      pre .diff .change {
+        background: #0086b3
+      }
+      pre .chunk {
+        color: #aaa
+      }
+    </style>
+  </head>
+  <body>  
+    <h1 id="-sublime-http-www-sublimetext-com-"><a href="http://www.sublimetext.com/">Sublime</a> 教學</h1>
+<p>在Linux裡，如果只會用vim，其實非常的不方便，sublime是一個很強大的免費軟體, 有點類似Keil C , 它可以直接幫你<strong> trace code跳入底層的函式</strong>,  讓開發者方便許多，但sublime剛開始的設定有點複雜，所以在此敘述安裝後的設定流程。</p>
+<p>Sublime 2官網下載：</p>
+<p><a href="http://www.sublimetext.com/2"></a><a href="http://www.sublimetext.com/2"><a href="http://www.sublimetext.com/2">http://www.sublimetext.com/2</a></a></p>
+<p>下載CSCOPE ：<a href="https://github.com/ameyp/CscopeSublime/archive/master.zip"></a><a href="https://github.com/ameyp/CscopeSublime/archive/master.zip"><a href="https://github.com/ameyp/CscopeSublime/archive/master.zip">https://github.com/ameyp/CscopeSublime/archive/master.zip</a></a></p>
+<p>下載ctags :<a href="https://github.com/SublimeText/CTags/archive/master.zip"></a><a href="https://github.com/SublimeText/CTags/archive/master.zip"><a href="https://github.com/SublimeText/CTags/archive/master.zip">https://github.com/SublimeText/CTags/archive/master.zip</a></a></p>
+<p>建議都是放在跟Sublime Text 2同一個目錄下.</p>
+<undefined><li><strong>step1</strong></li></undefined>
+
+<p>1) 打開sublime_text,進去後, <u>ctrl + `</u> 叫出 console</p>
+<p>2) 複製以下內容到console command line</p>
+<hr>
+<p>import urllib2,os; pf=&#39;Package Control.sublime-package&#39;; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),&#39;wb&#39;).write(urllib2.urlopen(&#39;<a href="http://sublime.wbond.net/"></a><a href="http://sublime.wbond.net/&#39;+pf.replace(">http://sublime.wbond.net/&#39;+pf.replace(</a>&#39; &#39;,&#39; &#39;)).read()); print &#39;Please restart Sublime Text to finish installation&#39;</p>
+<hr>
+<p>3) 看到結束之後,關掉重開Sublime Text 2</p>
+<p>4) 在工作列就可以看到 Preferences -&gt; Pacakge Control ,表示安裝成功</p>
+<p><strong>step2</strong></p>
+<p>Preferences -&gt; Package Control,執行之後可以看到畫面<u>Package Control ：</u></p>
+<p>直接打上ｉ，然後選第一個 <u>Package Control ：install package</u> 等待幾分鐘會出現畫面</p>
+<p>再打上ctags  按下去就對了,安裝好在重開</p>
+<p><strong>step3</strong></p>
+<p>再到終端機打上：  </p>
+<p>sudo apt-get install cscope（安裝cscope）</p>
+<p>sudo apt-get install ctags（安裝ctags）</p>
+<p><strong>step4</strong></p>
+<p>到終端機打cscope -b -q -k -R 可建立cscope</p>
+<p>到sublime工作列 Find-&gt; CTags -&gt; Rebuild Tags 可建立ctags</p>
+<p>參考連結：</p>
+<p><a href="http://villprog.blogspot.tw/2013/04/sublime-text-2.html"></a><a href="http://villprog.blogspot.tw/2013/04/sublime-text-2.html"><a href="http://villprog.blogspot.tw/2013/04/sublime-text-2.html">http://villprog.blogspot.tw/2013/04/sublime-text-2.html</a></a></p>
+<p><a href="http://villprog.blogspot.tw/2013/04/sublime-text-2.html"></a><a href="http://villprog.blogspot.tw/2013/04/sublime-text-2.html"><a href="http://villprog.blogspot.tw/2013/04/sublime-text-2.html">http://villprog.blogspot.tw/2013/04/sublime-text-2.html</a></a></p>
+<p><a href="http://blog.csdn.net/thunderclaus/article/details/11556159"></a><a href="http://blog.csdn.net/thunderclaus/article/details/11556159"><a href="http://blog.csdn.net/thunderclaus/article/details/11556159">http://blog.csdn.net/thunderclaus/article/details/11556159</a></a></p>
+<p><a href="http://cloverhsc.blogspot.tw/2013/09/sublime-text-ccide-in-windows3-ctags.html"></a><a href="http://cloverhsc.blogspot.tw/2013/09/sublime-text-ccide-in-windows3-ctags.html"><a href="http://cloverhsc.blogspot.tw/2013/09/sublime-text-ccide-in-windows3-ctags.html">http://cloverhsc.blogspot.tw/2013/09/sublime-text-ccide-in-windows3-ctags.html</a></a></p>
+
+  </body>
+</html>

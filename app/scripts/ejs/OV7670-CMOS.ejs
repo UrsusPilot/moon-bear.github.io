@@ -1,0 +1,303 @@
+<!DOCTYPE  html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>doc</title>
+    <style>
+      /*github.com style (c) Vasily Polovnyov <vast@whiteants.net>*/
+      pre code {
+        display: block; padding: 0.5em;
+        color: #333;
+        background: #f8f8ff
+      }
+      pre .comment,
+      pre .template_comment,
+      pre .diff .header,
+      pre .javadoc {
+        color: #998;
+        font-style: italic
+      }
+      pre .keyword,
+      pre .css .rule .keyword,
+      pre .winutils,
+      pre .javascript .title,
+      pre .nginx .title,
+      pre .subst,
+      pre .request,
+      pre .status {
+        color: #333;
+        font-weight: bold
+      }
+      pre .number,
+      pre .hexcolor,
+      pre .ruby .constant {
+        color: #099;
+      }
+      pre .string,
+      pre .tag .value,
+      pre .phpdoc,
+      pre .tex .formula {
+        color: #d14
+      }
+      pre .title,
+      pre .id {
+        color: #900;
+        font-weight: bold
+      }
+      pre .javascript .title,
+      pre .lisp .title,
+      pre .clojure .title,
+      pre .subst {
+        font-weight: normal
+      }
+      pre .class .title,
+      pre .haskell .type,
+      pre .vhdl .literal,
+      pre .tex .command {
+        color: #458;
+        font-weight: bold
+      }
+      pre .tag,
+      pre .tag .title,
+      pre .rules .property,
+      pre .django .tag .keyword {
+        color: #000080;
+        font-weight: normal
+      }
+      pre .attribute,
+      pre .variable,
+      pre .lisp .body {
+        color: #008080
+      }
+      pre .regexp {
+        color: #009926
+      }
+      pre .class {
+        color: #458;
+        font-weight: bold
+      }
+      pre .symbol,
+      pre .ruby .symbol .string,
+      pre .lisp .keyword,
+      pre .tex .special,
+      pre .prompt {
+        color: #990073
+      }
+      pre .built_in,
+      pre .lisp .title,
+      pre .clojure .built_in {
+        color: #0086b3
+      }
+      pre .preprocessor,
+      pre .pi,
+      pre .doctype,
+      pre .shebang,
+      pre .cdata {
+        color: #999;
+        font-weight: bold
+      }
+      pre .deletion {
+        background: #fdd
+      }
+      pre .addition {
+        background: #dfd
+      }
+      pre .diff .change {
+        background: #0086b3
+      }
+      pre .chunk {
+        color: #aaa
+      }
+    </style>
+  </head>
+  <body>  
+    <h1 id="ov7670-cmos-">OV7670-CMOS模組</h1>
+<p>原始版本datasheet<a href="http://www.voti.nl/docs/OV7670.pdf"></a><a href="http://www.voti.nl/docs/OV7670.pdf">http://www.voti.nl/docs/OV7670.pdf</a></p>
+<ul>
+<li><p>controlled through the Serial Camera Control Bus (SCCB) interface.</p>
+</li>
+<li><p>st standard lib DCMI example 有寫說SCCB是I2C like protocol！</p>
+</li>
+<li>詳細SCCB spec: <a href="http://www.ovt.com/download_document.php?type=document&amp;DID=63"></a><a href="http://www.ovt.com/download_document.php?type=document&amp;DID=63">http://www.ovt.com/download_document.php?type=document&amp;DID=63</a>
+*</li>
+</ul>
+<p>為了配合王同學<a href="https://github.com/Hom19910422/QCopterMachineVision">的QcopterMV開發板</a>，改用此模組(<strong>OV7670-CMOS</strong>)傳輸影像。</p>
+<p><img src="https://hackpad-attachments.s3.amazonaws.com/hackpad.com_HdKevEgZfSA_p.88862_1388211875814_123.jpg" alt=""></p>
+<table style="font-size:13px;cell-spacing: 0px; border-collapse: collapse;"><tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">VDD</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">GND</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added"></td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">/</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Pin</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Type</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Description</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">SDIOC</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">SDIOD</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added"></td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">/</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">VDD**</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Supply</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Power supply</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">VSYNC</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">HREF</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added"></td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">/</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">GND</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Supply</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Ground level</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">PCLK</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">XCLK</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added"></td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">/</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">SDIOC</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Input</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">SCCB clock</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">D7</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">D6</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added"></td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">/</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">SDIOD</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Output</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">SCCB data</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">D5</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">D4</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added"></td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">/</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">VSYNC</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Output</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Vertical synchronization</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">D3</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">D2</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added"></td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">/</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">HREF</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Output</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Horizontal synchronization</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">D1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">D0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added"></td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">/</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">PCLK</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Output</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Pixel clock</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">RESET</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">PWDN</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added"></td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">/</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">XCLK</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Input</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">System clock</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added"></td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added"></td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added"></td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">/</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">D0-D7</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Output</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Video parallel output</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added"></td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added"></td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added"></td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">/</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">RESET</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Input</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Reset (Active low)</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added"></td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added"></td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added"></td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">/</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">PWDN</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Input</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Power down (Active high)</td>
+</tr>
+</table>
+
+<p><img src="https://hackpad-attachments.s3.amazonaws.com/hackpad.com_HdKevEgZfSA_p.88862_1387902424723_未命名.png" alt=""></p>
+<p><img src="https://hackpad-attachments.s3.amazonaws.com/hackpad.com_HdKevEgZfSA_p.88862_1387902993979_未命名.png" alt=""></p>
+<p>王同學的QcopterMV開發板</p>
+<p><img src="https://hackpad-attachments.s3.amazonaws.com/hackpad.com_HdKevEgZfSA_p.88862_1387902821381_hackpad.com_FHBw4daIJbY_p.88549_1387801133805_DCMI.png" alt=""></p>
+<p>TTL Connection:</p>
+<p><img src="https://hackpad-attachments.s3.amazonaws.com/hackpad.com_HdKevEgZfSA_p.88862_1388735966152_1234.bmp" alt=""></p>
+<p>補充一下datasheet 此模組(<strong>OV7670-CMOS</strong>)</p>
+<p>IO 1~IO 3 對應到王同學的QcopterMV開發板lay out圖中的</p>
+<p>NetDCMI_18~NetDCMI_20</p>
+<p><img src="https://hackpad-attachments.s3.amazonaws.com/hackpad.com_HdKevEgZfSA_p.94311_1387903408829_undefined" alt=""></p>
+<p>接腳說明:</p>
+<ul>
+<li>OV7670 视频口有八根数据线, D[7:0]，它支持的数据格式有 8 位 RGB raw 输出, 8 位 YcbCr 输出, 8 位 RGB 565/555/444 输出。</li>
+<li>行同步信号 Href 和 Hsyn 是用同一引脚（Href pin）输出，通过写 SCCB 寄存器，可 选择这个引脚作为 Href 或 hsyn 信号。</li>
+<li>SCCB 总线 SIO_C 和 SIO_D 应外加上拉电阻，典型值是 4.7K。</li>
+<li>Reset#低有效，可由 GPIO 控制，若不使用时可连到 DOVDD。如果 Reset#连到 DOVDD，必 须通过写 SCCB 寄存器来进行软件复位。  </li>
+</ul>
+<h2 id="github-dcmi_ov7670">github  DCMI_OV7670</h2>
+<p>我們的影像開發專案：<a href="https://github.com/zxc2694/DCMI_OV7670"></a><a href="https://github.com/zxc2694/DCMI_OV7670"><a href="https://github.com/zxc2694/DCMI_OV7670">https://github.com/zxc2694/DCMI_OV7670</a></a></p>
+<p><strong>sccb.h:(腳位)</strong></p>
+<ul>
+<li><a href="/ep/search/?q=%23define&amp;via=HdKevEgZfSA">#define</a>  SCCB_SDA_PIN   GPIO_Pin_13</li>
+<li><h1 id="define-sccb_scl_pin-gpio_pin_3">define  SCCB_SCL_PIN   GPIO_Pin_3</h1>
+</li>
+<li><h1 id="define-sccb_sda_gpio-gpioc">define  SCCB_SDA_GPIO      GPIOC</h1>
+</li>
+<li><h1 id="define-sccb_scl_gpio-gpiob">define  SCCB_SCL_GPIO      GPIOB</h1>
+</li>
+<li><h1 id="define-sensor_vsync_pin-gpio_pin_7">define Sensor_VSYNC_PIN    GPIO_Pin_7</h1>
+</li>
+<li><h1 id="define-gpio_vsync-gpiob">define GPIO_VSYNC          GPIOB</h1>
+</li>
+<li><h1 id="define-rcc_vsync_clock-rcc_ahb2periph_gpiob">define RCC_VSYNC_Clock     RCC_AHB2Periph_GPIOB</h1>
+</li>
+<li><h1 id="define-gpio_pin_vsync_cmos-gpio_pin_3">define GPIO_PIN_VSYNC_CMOS                GPIO_Pin_3</h1>
+</li>
+<li><h1 id="define-exti_line_vsync_cmos-exti_line3">define EXTI_LINE_VSYNC_CMOS               EXTI_Line3</h1>
+</li>
+<li><h1 id="define-gpio_port_source_vsync_cmos-gpio_portsourcegpioc">define GPIO_PORT_SOURCE_VSYNC_CMOS        GPIO_PortSourceGPIOC</h1>
+</li>
+<li><h1 id="define-gpio_pin_source_vsync_cmos-gpio_pinsource3">define GPIO_PIN_SOURCE_VSYNC_CMOS         GPIO_PinSource3</h1>
+</li>
+</ul>
+<p><strong>SCCB<em>OV7670.c (_DCMI pins的連接</em>)</strong></p>
+<undefined><li><strong>void OV7670_HW_Init(void)  </strong></li></undefined>
+
+<p><a href="https://github.com/zxc2694/DCMI_OV7670/blob/master/program/SCCB_OV7670.c"></a><a href="https://github.com/zxc2694/DCMI_OV7670/blob/master/program/SCCB_OV7670.c"><a href="https://github.com/zxc2694/DCMI_OV7670/blob/master/program/SCCB_OV7670.c">https://github.com/zxc2694/DCMI_OV7670/blob/master/program/SCCB_OV7670.c</a></a></p>
+<undefined><li>
+</li></undefined>
+
+<h2 id="-">相關教學</h2>
+<p>1.<a href="http://www.dzsj.net/dzcp/%E5%9F%BA%E4%BA%8ESTM32F417%E7%9A%84%E5%9B%BE%E5%83%8F%E9%87%87%E9%9B%86%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1.htm">基于STM32F417的图像采集系统设计</a></p>
+<p>2.<a href="http://bbs.eeworld.com.cn/thread-355582-1-1.html">51+OV7670+FIFO+SD卡+znFAT+QVGA BMP 实现简易数码相机</a></p>
+<ol>
+<li><p>參考文件 : <a href="https://www.dropbox.com/s/6e5dv705glwmz6a/OV7670-CCD%E6%A8%A1%E7%B5%84.rar">OV7670-CCD模組.rar</a></p>
+</li>
+<li><p><a href="http://www.amobbs.com/thread-5038120-1-1.html">DCMI_Config</a></p>
+</li>
+<li><p><a href="http://wenku.baidu.com/view/74efaec0aa00b52acfc7ca22.html">SCCB與 I2C差別</a> (<a href="http://blog.csdn.net/liugf05/article/details/8167771">補充</a>)</p>
+</li>
+<li><p>OV7670输出同步信号包括：场同步信号VSYNC、行同步信号HREF、像素时钟PCLK。</p>
+</li>
+<li><p>在系统初始化设置成功以后，微控制器不断监测VSYNC信号电平变化，根据VSYNC产生的中断情况，控制FIFO对图像数据的读／写：</p>
+</li>
+<li><p>当STM32F417<strong>第一次检测到VSYNC下降沿时，系统第一次产生中断，表明OV7670开始输出一帧图像</strong>，STM32F417将FIFO_WEN置高电平，当HREF有效(高电平)时，<strong>FIFO_WEN</strong>与HREF通过与非门使能FIFO的WCK，将有效图像数据自动写入FIFO中。</p>
+</li>
+<li><strong>.当第二次VSYNC中断产生时，表明已经将一帧完整的图像写入FIFO</strong>，系统通过将<strong>FIFO_WEN</strong>置低，锁存一帧图像数据，实现图像的静态存储。此时，STM32F417送给FIFO的读时钟RCLK一个上升沿，将数据从FIFO中读出来，完成图像数据的实时采集与提取。</li>
+</ol>
+<p><img src="https://hackpad-attachments.s3.amazonaws.com/hackpad.com_HdKevEgZfSA_p.88862_1388213982652_undefined" alt=""></p>
+<ul>
+<li>由于对摄像头工作参数的配置主要通过<strong>SCCB</strong>来实现，因此，在系统进行软件设计时，首先设计SCCB相关程序，进而通过SCCB设置摄像头的相关参数。</li>
+</ul>
+<p>其它 github參考範例:</p>
+<p><a href="https://github.com/desaster/ov7670test"></a><a href="https://github.com/desaster/ov7670test"><a href="https://github.com/desaster/ov7670test">https://github.com/desaster/ov7670test</a></a></p>
+<p><a href="https://github.com/ctc8631/ov7670"></a><a href="https://github.com/ctc8631/ov7670"><a href="https://github.com/ctc8631/ov7670">https://github.com/ctc8631/ov7670</a></a></p>
+<p><a href="https://github.com/Ursadon/ov7670-stm32"></a><a href="https://github.com/Ursadon/ov7670-stm32"><a href="https://github.com/Ursadon/ov7670-stm32">https://github.com/Ursadon/ov7670-stm32</a></a></p>
+
+  </body>
+</html>

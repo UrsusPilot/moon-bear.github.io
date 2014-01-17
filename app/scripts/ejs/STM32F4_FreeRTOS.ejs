@@ -1,0 +1,157 @@
+<!DOCTYPE  html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>doc</title>
+    <style>
+      /*github.com style (c) Vasily Polovnyov <vast@whiteants.net>*/
+      pre code {
+        display: block; padding: 0.5em;
+        color: #333;
+        background: #f8f8ff
+      }
+      pre .comment,
+      pre .template_comment,
+      pre .diff .header,
+      pre .javadoc {
+        color: #998;
+        font-style: italic
+      }
+      pre .keyword,
+      pre .css .rule .keyword,
+      pre .winutils,
+      pre .javascript .title,
+      pre .nginx .title,
+      pre .subst,
+      pre .request,
+      pre .status {
+        color: #333;
+        font-weight: bold
+      }
+      pre .number,
+      pre .hexcolor,
+      pre .ruby .constant {
+        color: #099;
+      }
+      pre .string,
+      pre .tag .value,
+      pre .phpdoc,
+      pre .tex .formula {
+        color: #d14
+      }
+      pre .title,
+      pre .id {
+        color: #900;
+        font-weight: bold
+      }
+      pre .javascript .title,
+      pre .lisp .title,
+      pre .clojure .title,
+      pre .subst {
+        font-weight: normal
+      }
+      pre .class .title,
+      pre .haskell .type,
+      pre .vhdl .literal,
+      pre .tex .command {
+        color: #458;
+        font-weight: bold
+      }
+      pre .tag,
+      pre .tag .title,
+      pre .rules .property,
+      pre .django .tag .keyword {
+        color: #000080;
+        font-weight: normal
+      }
+      pre .attribute,
+      pre .variable,
+      pre .lisp .body {
+        color: #008080
+      }
+      pre .regexp {
+        color: #009926
+      }
+      pre .class {
+        color: #458;
+        font-weight: bold
+      }
+      pre .symbol,
+      pre .ruby .symbol .string,
+      pre .lisp .keyword,
+      pre .tex .special,
+      pre .prompt {
+        color: #990073
+      }
+      pre .built_in,
+      pre .lisp .title,
+      pre .clojure .built_in {
+        color: #0086b3
+      }
+      pre .preprocessor,
+      pre .pi,
+      pre .doctype,
+      pre .shebang,
+      pre .cdata {
+        color: #999;
+        font-weight: bold
+      }
+      pre .deletion {
+        background: #fdd
+      }
+      pre .addition {
+        background: #dfd
+      }
+      pre .diff .change {
+        background: #0086b3
+      }
+      pre .chunk {
+        color: #aaa
+      }
+    </style>
+  </head>
+  <body>  
+    <h1 id="stm32f4-freertos-">STM32F4與FreeRTOS中斷</h1>
+<p>在開發途中發現許多幾個跟中斷的問題，我們要使用FreeRTOS就必須符合正確觸發中斷的條件。</p>
+<p>第一個也是最重要的就是－<strong>FreeRTOS的Task優先權(數字越大擁有越高優先權)和Cortex-M的中斷優先權(數字越小擁有越大優先權)是剛好顛倒的</strong>，這在FreeRTOS網站上強調很多次。</p>
+<p>第二個則是FreeRTOS建議Cortex-M架構的MCU使用只用搶佔優先權(preemption piority)沒有次要優先權(sub piority)的中斷，在使用ST LIB時必須在使用任何NVIC之前呼叫</p>
+<p>NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4)</p>
+<p>這樣才能確保呼叫正確，以STM32F4例子來說我們有4bit的preemption level，0~15的優先權</p>
+<p>在FreeRTOSConfig.h有兩個選擇可以決定如何移植FreeRTOS的中斷</p>
+<ul>
+<li>configKERNEL_INTERRUPT_PRIORITY should be set to the lowest priority. <undefined><li><strong><u>1.For ports that only implement configKERNEL_INTERRUPT_PRIORITY</u></strong></li></undefined>
+
+</li>
+</ul>
+<p>configKERNEL_INTERRUPT_PRIORITY sets the interrupt priority <strong>used by the RTOS kernel itself</strong>.</p>
+<ul>
+<li>Interrupts that call API functions must also execute <strong>at this priority.</strong></li>
+<li>Interrupts that do not call API functions can  execute at higher priorities </li>
+<li>Interrupts that do not call API functions can execute  at higher priorities and therefore never have their execution delayed  by the RTOS kernel activity (within the limits of the hardware itself)</li>
+</ul>
+<undefined><li><strong><u>2.For ports that implement both configKERNEL_INTERRUPT_PRIORITY and configMAX_SYSCALL_INTERRUPT_PRIORITY</u></strong></li></undefined>
+
+<ul>
+<li>configKERNEL_INTERRUPT_PRIORITY sets the interrupt priority used by the RTOS kernel itself.  </li>
+<li>configMAX_SYSCALL_INTERRUPT_PRIORITY sets the <strong>highest interrupt priority</strong> from which interrupt <strong>safe FreeRTOS API functions </strong>can be called. </li>
+<li>A full interrupt nesting model is achieved by setting  configMAX_SYSCALL_INTERRUPT_PRIORITY above (that is, at a higher  priority level) than configKERNEL_INTERRUPT_PRIORITY.</li>
+<li><strong>This means the FreeRTOS kernel does not completely disable interrupts, even inside critical sections.</strong></li>
+<li>Interrupts that do not call API functions can execute  at priorities above configMAX_SYSCALL_INTERRUPT_PRIORITY and therefore  never be delayed by the RTOS kernel execution. </li>
+</ul>
+<p>Ex: 0 being the lowest and 7 being the highest</p>
+<p><img src="https://hackpad-attachments.s3.amazonaws.com/hackpad.com_b5vnsVtmVuw_p.88549_1388039125130_Interrupt-priorities-interrupt-nesting.jpg" alt=""></p>
+<p>To utilize this scheme your application design must adhere to the following rule: <strong>Any  interrupt that uses the FreeRTOS API must be set to the same priority  as the RTOS kernel (as configured by the configKERNEL_INTERRUPT_PRIORITY macro), or at or below  configMAX_SYSCALL_INTERRUPT_PRIORITY for ports that include this  functionality.</strong></p>
+<p>所有要用FreeRTOS API的中斷其優先權必須要同等於RTOS Kernel的中斷相等(<strong>configKERNEL_INTERRUPT_PRIORITY</strong>)或是優先權比<strong>configMAX_SYSCALL_INTERRUPT_PRIORITY低</strong></p>
+<p>從上的結論可以看出，在我們的例子使用了2的實現方式，這代表著中斷可以為不呼叫FreeRTOS的API或是呼叫FreeRTOS的API。也可以分成優先權比<strong>configMAX_SYSCALL_INTERRUPT_PRIORITY</strong>高或低。</p>
+<p><strong>Tasks 流程</strong></p>
+<p><a href="http://www.freertos.org/RTOS-task-states.html"></a><a href="http://www.freertos.org/RTOS-task-states.html">http://www.freertos.org/RTOS-task-states.html</a></p>
+<p>vTaskResume() &amp; vTaskSuspend() 的使用</p>
+<p><img src="https://hackpad-attachments.s3.amazonaws.com/hackpad.com_b5vnsVtmVuw_p.88862_1388901188242_tskstate.gif" alt=""></p>
+<h2 id="semaphore">Semaphore</h2>
+<p><a href="http://www.socialledge.com/sjsu/index.php?title=FreeRTOS_Tutorial" title="FreeRTOS_Tutorial"></a><a href="http://www.socialledge.com/sjsu/index.php?title=FreeRTOS_Tutorial">http://www.socialledge.com/sjsu/index.php?title=FreeRTOS_Tutorial</a></p>
+<p>*</p>
+<p><a href="http://www.youtube.com/watch?v=grXuVMttVuU"></a><a href="http://www.youtube.com/watch?v=grXuVMttVuU">http://www.youtube.com/watch?v=grXuVMttVuU</a></p>
+
+  </body>
+</html>
