@@ -2,11 +2,8 @@ QuadcopterFlightControl
 ======================
 This is a quadcopter flight control board base on [QCopterFlightControl2.0](https://github.com/Hom19910422/QCopterFlightControl).	In this version, we design new software which include FreeRTOS, a kind of real-time OS. That means we could manage manay task and implement mult-thread application. User can see the sensor status when you try to design or monitor you rotor. A special designed shell enironment could help user to send some command or do some actions on rotors.
 
-License
-======================
-* The [QCopterFlightControl](https://github.com/Hom19910422/QCopterFlightControl) project is auorized by [Hom19910422](Hom19910422@gmail.com)
-
-* The [lineoise](https://github.com/antirez/linenoise) is auorized under BSD License and release by [antirez](antirez@gmail.com)
+<iframe width="560" height="315" src="//www.youtube.com/embed/_L0hhZS_mhM" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="//www.youtube.com/embed/Qm8GnarqmA8" frameborder="0" allowfullscreen></iframe>
 
 Features
 ======================
@@ -37,5 +34,9 @@ Linenoise hotkeys
 ======================
 * To get more informations, please read the LINENOISE.md
 
-TODO
+License
 ======================
+* The [QCopterFlightControl](https://github.com/Hom19910422/QCopterFlightControl) project is auorized by [Hom19910422](Hom19910422@gmail.com)
+
+* The [lineoise](https://github.com/antirez/linenoise) is auorized under BSD License and release by [antirez](antirez@gmail.com)
+

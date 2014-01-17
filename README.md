@@ -65,6 +65,15 @@ quick push code
 make push
 ```
 
+## Render
+
+Rendering markdown files to ejs files enter
+
+```
+grunt render
+```
+
+
 ## Writing post
 
 If you are not going to develop the repo, but changing the context of the html. All you have to do is fork the repo and  go to the folder `app/scripts/md` and add a file and folder. **Please do not change the `app/scripts/templates` folder by manual** 
