@@ -1,0 +1,246 @@
+<h1 id="nrf24l01-">nRF24L01無線模組</h1>
+<p><img src="http://www.micro4you.com/files/itead/NRF24L01.JPG" alt=""></p>
+<p><img src="https://hackpad-attachments.s3.amazonaws.com/hackpad.com_9tVeioOBKG7_p.88549_1388992064031_QCopterFC_Config_PIN.png" alt=""></p>
+<p>Pin CE(PC4) Chip Enable Activates RX or TX mode</p>
+<p><a href="http://www.micro4you.com/files/itead/NRF24L01.JPG"></a><a href="http://www.micro4you.com/files/itead/NRF24L01.JPG">http://www.micro4you.com/files/itead/NRF24L01.JPG</a></p>
+<p>在此專案有兩個類似的傳輸方式：</p>
+<ul>
+<li><strong>I2C</strong> 給 ms5611 (氣壓感測器) 傳輸用的</li>
+<li><strong>SPI</strong> 給 nrf24l01（RF模組) 傳輸用的</li>
+</ul>
+<p>－－－－－－－－－－－－－－－－－－－－－－</p>
+<p>這裡先介紹nrf24l01部份</p>
+<p>[<a href="http://www.nordicsemi.com/eng/content/download/2730/34105/file/nRF24L01_Product_Specification_v2_0.pdf">nRF24L01-Datasheet</a>]    </p>
+<p>[<a href="http://baike.baidu.com/view/3325625.htm">參考連結</a>]     </p>
+<p>[<a href="http://www.you01.com/forum.php?mod=viewthread&amp;tid=2454&amp;extra=">相關文獻</a>]   </p>
+<p>[<a href="http://www.docin.com/p-419744496.html">nRF教學</a> ]</p>
+<p>github: [<a href="https://github.com/zxc2694/QuadrotorGroundStation"> QuadrotorGroundStation</a> ]</p>
+<p><strong>note：</strong></p>
+<ul>
+<li>必須使用<strong>3.3V</strong> 做為電源, 因為nRF24L01的工作電壓是1.9~3.6V，使用5V的電壓會把模組燒壞。</li>
+<li><p>此飛控板用的是<strong>SPI2的腳位。</strong></p>
+</li>
+<li><p><strong>CSN、SCK、MISO、MOSI　屬於SPI 腳位</strong></p>
+</li>
+<li><strong>CE：使能發射或接收</strong></li>
+<li><strong>IRQ：中斷旗標</strong></li>
+<li>參考stm32F4 Datasheet  <strong>P.51</strong> （有說明SPI2 屬於哪隻腳位）</li>
+</ul>
+<h2 id="-">模組腳位說明</h2>
+<table style="font-size:13px;cell-spacing: 0px; border-collapse: collapse;"><tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Pin</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#21517;&#31281;</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#33139;&#20301;&#21151;&#33021;</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#25551;&#36848;</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">CE</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Digital Input</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">RX&#25110;TX&#27169;&#24335;&#36873;&#25321;</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">2</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">CSN</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Digital Input</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">SPI&#29255;&#36873;&#20449;&#21495;</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">3</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">SCK</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Digital Input</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">SPI&#26102;&#38047;</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">4</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">MOSI</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Digital Input</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#20174;SPI&#25968;&#25454;&#36755;&#20837;&#33050;</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">5</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">MISO</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Digital Input</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#20174;SPI&#25968;&#25454;&#36755;&#20986;&#33050;</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">6</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">IRQ</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Digital Input</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#21487;&#23631;&#34109;&#20013;&#26029;&#33050;</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">7</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">VDD</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#30005;&#28304;</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#30005;&#28304;&#65288;+3V&#65289;</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">8</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">VSS</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#30005;&#28304;</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#25509;&#22320;&#65288;0V&#65289;</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">9</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">XC2</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Analog Output</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#26230;&#20307;&#25391;&#33633;&#22120;2&#33050;</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">10</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">XC1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Analog Input</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#26230;&#20307;&#25391;&#33633;&#22120;1&#33050;/&#22806;&#37096;&#26102;&#38047;&#36755;&#20837;&#33050;</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">11</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">VDD-PA</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#30005;&#28304;&#36755;&#20986;</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#32473;RF&#30340;&#21151;&#29575;&#25918;&#22823;&#22120;&#25552;&#20379;&#30340;+1.8V&#30005;&#28304;</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">12</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">ANT1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#22825;&#32447;</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#22825;&#32447;&#25509;&#21475;1</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">13</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">ANT2</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#22825;&#32447;</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#22825;&#32447;&#25509;&#21475;2</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">14</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">VSS</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#30005;&#28304;</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#25509;&#22320;&#65288;0V&#65289;</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">15</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">VDD</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#30005;&#28304;</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#30005;&#28304;&#65288;+3V&#65289;</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">16</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">IREP</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Analog Input</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#21442;&#32771;&#30005;&#27969;</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">17</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">VSS</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#30005;&#28304;</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#25509;&#22320;&#65288;0V&#65289;</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">18</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">VDD</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#30005;&#28304;</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#30005;&#28304;&#65288;+3V&#65289;</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">19</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">DVDD</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#30005;&#28304;&#36755;&#20986;</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#21435;&#32806;&#30005;&#36335;&#30005;&#28304;&#27491;&#26497;&#31471;</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">20</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">VSS</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#30005;&#28304;</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">&#25509;&#22320;&#65288;0V&#65289;</td>
+</tr>
+</table>
+
+<p><strong>晶片：</strong></p>
+<p><img src="https://hackpad-attachments.s3.amazonaws.com/hackpad.com_9tVeioOBKG7_p.88862_1386941196447_ic.png" alt=""></p>
+<p><strong>模組：</strong></p>
+<p><img src="https://hackpad-attachments.s3.amazonaws.com/hackpad.com_9tVeioOBKG7_p.88862_1386942041316_pcb.png" alt=""></p>
+<h2 id="-">方塊圖</h2>
+<p><img src="https://hackpad-attachments.s3.amazonaws.com/hackpad.com_9tVeioOBKG7_p.88862_1386647526551_rf.png" alt=""></p>
+<h2 id="-rf-nrf24l01-">與RF模組(nrf24l01)有關的程式碼</h2>
+<p><strong>QCopterFC_transport.c</strong></p>
+<ul>
+<li>兩個副函式：</li>
+</ul>
+<p>void Transport_Recv( u8* RecvBuf )                            // 用來紀錄接收資料</p>
+<p>void Transport_Send( u8* SendBuf )                            // 用來紀錄發送資料</p>
+<p><strong>module_nrf24l01.c</strong></p>
+<ul>
+<li>十個副函式：</li>
+</ul>
+<p>void nRF24L01_Config( void )                                                  //初始化設定</p>
+<p>void nRF_WriteReg( u8 WriteAddr, u8 WriteData )                      //寫暫存器</p>
+<p>u8 nRF_ReadReg( u8 ReadAddr )                                               //讀暫存器</p>
+<p>void nRF_WriteBuf( u8 WriteAddr, u8 *WriteBuf, u8 Bytes ) //連續寫暫存器</p>
+<p>void nRF_ReadBuf( u8 ReadAddr, u8 *ReadBuf, u8 Bytes ) //連續讀暫存器</p>
+<p>void nRF_RX_Mode( void )                                                   //轉成接收模式</p>
+<p>void nRF_TX_Mode( void )                                                   //轉成發射模式</p>
+<p>u8 nRF_Check( void )                                 // 檢測是否MCU與NRF成功連接</p>
+<p>u8 nRF_Tx_Data( u8 *TxBuf )                                                      //傳送資料</p>
+<p>u8 nRF_Rx_Data( u8* )                                                                //接收資料</p>
+<p><strong>stm32f4_spi.c</strong></p>
+<ul>
+<li>兩個副函式：</li>
+</ul>
+<p><s>u8 SPI_RW( SPI_TypeDef* SPIx, u8 WriteByte )             //接收1Byte的資料</s></p>
+<p>void SPI_WriteByte( SPI_TypeDef* SPIx, u8 WriteByte ) //傳送1Byte的資料</p>
+<p>u8 SPI_ReadByte( SPI_TypeDef* SPIx )                        //接收1Byte的資料</p>
+<ul>
+<li>SPI_RW與SPI_WriteByte只是差在於一個有return一個沒有, 其實stm32f4_spi.c程式有點問題,因為三個副函式內容幾乎一樣</li>
+</ul>
+<hr>
+<p>讀寫的副函式（module_nrf24l01.c）</p>
+<ul>
+<li>傳輸方式都是先寫入一個address,在給他一個資料 ,在將NRF_CSN旗標設為1,即可送出去</li>
+</ul>
+<p>void <strong>nRF_WriteReg</strong>( u8 WriteAddr, u8 WriteData )</p>
+<p>{</p>
+<p>  NRF_CE = 0;</p>
+<p>  NRF_CSN = 0;</p>
+<p>  SPI_WriteByte(nRF_SPI, WriteAddr);</p>
+<p>  SPI_WriteByte(nRF_SPI, WriteData);</p>
+<p>  NRF_CSN = 1;</p>
+<p>}</p>
+<p>u8 <strong>nRF_ReadReg</strong>( u8 ReadAddr )</p>
+<p>{</p>
+<p>  u8 ReadData;</p>
+<p>  NRF_CE = 0;</p>
+<p>  NRF_CSN = 0;</p>
+<p>  SPI_WriteByte(nRF_SPI, ReadAddr);</p>
+<p>  ReadData = SPI_ReadByte(nRF_SPI);</p>
+<p>  NRF_CSN = 1;</p>
+<p>  return ReadData;</p>
+<p>}</p>
+<ul>
+<li>在<strong>QCopterFC.c</strong>主要利用</li>
+<li><strong> nRF_TX_Mode、nRF_Tx_Data、nRF_RX_Mode、 nRF_Rx_Data</strong> 四個副函式</li>
+<li>來實現收發控制</li>
+</ul>
+<p>/<strong><strong><strong><strong><strong><strong>**</strong></strong></strong></strong></strong></strong> FSM Tx <strong><strong><strong><strong><strong><strong><strong><strong><strong><em>**</em></strong></strong></strong></strong></strong></strong></strong></strong></strong>/</p>
+<pre><code>case FSM_Tx:
+
+  // FSM_Tx
+
+  **nRF_TX_Mode**();                                    //轉成發射模式
+
+  do {
+
+    Sta = **nRF_Tx_Data**(TxBuf[0]);            //傳送資料
+
+  } while(Sta == MAX_RT);
+
+  // FSM_Tx End
+
+  FSM_State = FSM_Rx;
+
+  break;
+
+/************************** FSM Rx ****************************************/
+
+case FSM_Rx:
+
+  // FSM_Rx
+
+ ** nRF_RX_Mode**();                                 //轉成接收模式
+
+  Sta = **nRF_Rx_Data**(RxBuf[0]);           //接收資料
+
+  if(Sta == RX_DR) {
+
+    Transport_Recv(RxBuf[0]);
+
+  }
+
+  // FSM_Rx End
+
+  FSM_State = FSM_CTRL;
+
+  break;</code></pre>
+<p><strong>補充：</strong></p>
+<p>[<a href="http://blog.sina.com.cn/s/blog_9eb7f83f0101517g.html">其它模組nRF2401AG</a>]</p>
+<p>[<a href="http://pdf1.alldatasheet.com/datasheet-pdf/view/144036/ETC1/NRF2401AG.html">nRF2401AG Datasheet</a> ]</p>
+<p>[<a href="https://sites.google.com/site/playrobotquickstart/home/xbee-wu-xian-tao-jian">xbee</a> ]</p>
+

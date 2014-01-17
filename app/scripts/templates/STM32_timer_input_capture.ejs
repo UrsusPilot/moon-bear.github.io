@@ -1,0 +1,8 @@
+<h1 id="-stm32-timer-input-capture-pwm-">如何用STM32 Timer Input Capture  計算 PWM訊號寬度</h1>
+<p>　　雖然STM32可以使用PWM Input Capture簡單的去計算PWM的脈波頻率以及其Duty Cycle，但是會遇到一個問題，開啟PWM Input Capture會占用兩個Timer的通道，這樣如果我想要接收五動的遙控器訊號，這樣會用到5個Timer，這樣會浪費太多Timer而且實際面我們飛控板並沒有這麼多接腳。</p>
+<ul>
+<li>在我實驗中只有開啟Timer4然後使用CH1和CH2的CCR</li>
+</ul>
+<p>　　第一，我們要知道RC訊號控制機器的重點為高電位的時間(Pulse Width)，頻率反而不是我們所需要注重的地方，所以我只需要去抓取高電位的時間。第二，Timer Input Capture有三種模式可以觸發，Rising,Falling,BothEdge，如果我利用計算的方式或者改變觸發條件的Polarity就可以計算出脈波寬。第三個要注意到Time Base和計數器CCR，Timebase 一定要比PWM頻率高(取樣定理)，還有計數器是否會Overflow。</p>
+<p>*</p>
+
