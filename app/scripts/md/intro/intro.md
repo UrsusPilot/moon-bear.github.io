@@ -1,9 +1,28 @@
 QuadcopterFlightControl
 ======================
-This is a quadcopter flight control board base on [QCopterFlightControl2.0](https://github.com/Hom19910422/QCopterFlightControl).	In this version, we design new software which include FreeRTOS, a kind of real-time OS. That means we could manage manay task and implement mult-thread application. User can see the sensor status when you try to design or monitor you rotor. A special designed shell enironment could help user to send some command or do some actions on rotors.
+
+This is a quadcopter flight control project based on [QCopterFlightControl2.0](https://github.com/Hom19910422/QCopterFlightControl).	The software is being heavily modified in order to adapt FreeRTOS derived multi-threaded and priority-based computing environment. That means we could manage manay task and implement mult-thread application. User can see the sensor status when you try to design or monitor you rotor. A special designed shell enironment could help user to send some command or do some actions on rotors.
+
+[Developing Note](https://zoo.hackpad.com/ep/pad/static/Y4388OmZRRA)
+
+<img src = "https://lh6.googleusercontent.com/-30ZaooIhtY0/UlT09AWvWmI/AAAAAAAAER0/mvbLm6LFEQ4/w958-h539-no/DSC_1506.jpg" width=600>
+
+Demo Video
+======================
 
 <iframe width="560" height="315" src="//www.youtube.com/embed/_L0hhZS_mhM" frameborder="0" allowfullscreen></iframe>
 <iframe width="560" height="315" src="//www.youtube.com/embed/Qm8GnarqmA8" frameborder="0" allowfullscreen></iframe>
+
+License
+======================
+* The [QCopterFlightControl](https://github.com/Hom19910422/QCopterFlightControl) project is copyrighted by [Hom19910422](Hom19910422@gmail.com) and governed by MIT license.
+
+
+* The [lineoise](https://github.com/antirez/linenoise) is copyrighted under BSD license and release by [antirez](antirez@gmail.com)
+
+* Detailed license file can be found in `LICENSE`.
+
+* The [QuadcopterFlightControl](https://github.com/QuadCopterTainan/QuadcopterFlightControl) is released as MIT License and welcome to send any feedback to us!
 
 Features
 ======================
@@ -32,11 +51,6 @@ After enable the command line, you can type :
 
 Linenoise hotkeys
 ======================
-* To get more informations, please read the LINENOISE.md
+* To get more informations, please read the [LINENOISE.md](https://github.com/moon-bear/QuadcopterFlightControl/blob/master/documentation/LINENOISE.md)
 
-License
-======================
-* The [QCopterFlightControl](https://github.com/Hom19910422/QCopterFlightControl) project is auorized by [Hom19910422](Hom19910422@gmail.com)
-
-* The [lineoise](https://github.com/antirez/linenoise) is auorized under BSD License and release by [antirez](antirez@gmail.com)
 
