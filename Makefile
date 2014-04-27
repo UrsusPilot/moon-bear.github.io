@@ -1,6 +1,6 @@
 deploy:
 	grunt build
-	git subtree push --prefix dist origin master
+	git push origin `git subtree split --prefix dist dev`:master --force
 
 push:
 	git push origin dev
